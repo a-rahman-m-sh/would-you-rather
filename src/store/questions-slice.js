@@ -8,7 +8,6 @@ const questionsSlice = createSlice({
   reducers: {
     recieveQuestions(state, action) {
       state.questions = action.payload.questions;
-      console.log(state.questions);
     },
 
     recieveAnswer(state, action) {
@@ -30,7 +29,6 @@ const questionsSlice = createSlice({
         ...state.questions,
         [action.payload.id]: action.payload,
       };
-      console.log(state.questions);
     },
   },
 });

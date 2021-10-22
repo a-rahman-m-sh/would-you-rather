@@ -30,12 +30,7 @@ function MainNavigation() {
           )}
           {IsAuthUser && (
             <li>
-              <Link to="/unAnswered">Un Answerd Questions</Link>
-            </li>
-          )}
-          {IsAuthUser && (
-            <li>
-              <Link to="/answered">Answerd Questions</Link>
+              <Link to="/">Home</Link>
             </li>
           )}
           {IsAuthUser && (

@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  margin: 5px;
+}
+
+
+button {
+  font: inherit;
+  background-color: transparent;
+  border: 1px solid rgb(143, 10, 196);
+  color: rgb(143, 10, 196);
+  font-weight: bold;
+  padding: 0.5rem 1.5rem;
+  margin: 5px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #c291e2;
+  color: #38015c;}
+
+  .active {
+    background-color: #c291e2;
+    color: #38015c;}

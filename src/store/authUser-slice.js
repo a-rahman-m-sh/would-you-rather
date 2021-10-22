@@ -23,14 +23,12 @@ const authUserSlice = createSlice({
       state.unAnsweredQuestions = [];
       state.answeredQuestionsIds = [];
       state.unAnsweredQuestionsIds = [];
-      console.log("removing");
     },
     updateAuthUserQuestions(state, action) {
       state.answeredQuestoins = action.payload.answeredQuestoins;
       state.unAnsweredQuestions = action.payload.unAnsweredQuestions;
       state.answeredQuestionsIds = action.payload.answeredQuestionsIds;
       state.unAnsweredQuestionsIds = action.payload.unAnsweredQuestionsIds;
-      console.log(state.answeredQuestionsIds, state.unAnsweredQuestionsIds);
     },
     updateAddedQuestions(state, action) {
       state.createdQuestions = [...state.createdQuestions, action.payload.id];

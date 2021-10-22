@@ -6,15 +6,13 @@ import { useEffect } from "react";
 import { fetchUsersData } from "../src/store/users-actions";
 import { fetchQuestionsData } from "../src/store/questions-actions";
 import SignInPage from "./pages/SignInPage";
-import UnAnsweredQuestionsPage from "./pages/UnAnsweredQuestionsPage";
-import AnsweredQuestionsPage from "./pages/AnsweredQuestionsPage";
 import LeaderboardPage from "./pages/LeaderboardPage";
 import AddQuestionPage from "./pages/AddQuestionPage";
 import DetailedQuestion from "./components/QuestionList/DetailedQuestion";
 
+
 function App() {
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.users.users);
   const IsAuthUser = useSelector((state) => state.authUser.IsAuthUser);
   useEffect(() => {
     dispatch(fetchUsersData());
@@ -22,26 +20,20 @@ function App() {
   useEffect(() => {
     dispatch(fetchQuestionsData());
   }, [dispatch]);
-
-  console.log(users);
+  
+  !IsAuthUser && alert("Login to play the game ...");
   return (
     <Layout>
       <Switch>
         <Route path="/" exact>
-          <HomePage />
+          {IsAuthUser && <HomePage />}
+          {!IsAuthUser && <Redirect to="/login" />}
         </Route>
         <Route path="/login">
           {!IsAuthUser && <SignInPage />}
           {IsAuthUser && <Redirect to="/" />}
         </Route>
-        <Route path="/unAnswered">
-          {IsAuthUser && <UnAnsweredQuestionsPage />}
-          {!IsAuthUser && <Redirect to="/" />}
-        </Route>
-        <Route path="/answered">
-          {IsAuthUser && <AnsweredQuestionsPage />}
-          {!IsAuthUser && <Redirect to="/" />}
-        </Route>
+
         <Route path="/question/:questionId">
           {IsAuthUser && <DetailedQuestion />}
           {!IsAuthUser && <Redirect to="/" />}

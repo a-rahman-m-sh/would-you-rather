@@ -8,21 +8,28 @@ const usersSlice = createSlice({
   reducers: {
     recieveUsers(state, action) {
       state.users = action.payload.users;
-      console.log(state.users);
     },
     answeredQuestion(state, action) {
-      console.log(state.users);
-      // const { authedUser, qid, answer } = action.payload;
-      // state.users = {
-      //   ...state.users,
-      //   [authedUser]: {
-      //     ...state.users[authedUser],
-      //     answers: {...state.users[authedUser].answer, [qid]: answer },
-      //   },
-      // };
-
+      const { authedUser, qid, answer } = action.payload;
+      state.users = {
+        ...state.users,
+        [authedUser]: {
+          ...state.users[authedUser],
+          answers: { ...state.users[authedUser].answers, [qid]: answer },
+        },
+      };
     },
-    createdQuetion(state, action) {},
+    addedQuestion(state, action) {
+      const { authedUser, qid } = action.payload;
+
+      state.users = {
+        ...state.users,
+        [authedUser]: {
+          ...state.users[authedUser],
+          questions: [...state.users[authedUser].questions, qid],
+        },
+      };
+    },
   },
 });
 

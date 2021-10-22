@@ -33,7 +33,7 @@ function NewQuestion() {
     <div className={classes.father}>
       <div className={classes.container}>
         <h1>Add Question</h1>
-        <h3> Would You Rather</h3>
+        <h2> Would You Rather...</h2>
         <form onSubmit={submitHandler}>
           <div>
             <p>Option One</p>

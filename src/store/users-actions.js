@@ -17,3 +17,11 @@ export function answerQ(info) {
     }))
   }
 }
+export function addQ(info) {
+  return (dispatch) => {
+    dispatch(usersActions.addedQuestion({
+      authedUser: info.author,
+      qid: info.id,
+    }))
+  }
+}
