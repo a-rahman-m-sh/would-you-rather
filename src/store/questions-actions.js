@@ -26,11 +26,11 @@ export function handleAddQuestion(optionOneText, optionTwoText) {
     return saveQuestion(info).then((question) => {
       dispatch(
         questionsActions.addQuestion({
-          author: question.author,
           id: question.id,
+          author: question.author,
           optionOne: question.optionOne,
           optionTwo: question.optionTwo,
-          timeStamp: question.timeStamp,
+          timestamp: question.timestamp,
         })
       );
       dispatch(addQ(question));

@@ -3,17 +3,18 @@ import { useDispatch, useSelector } from "react-redux";
 import classes from "./NewQuestion.module.css";
 import { handleAddQuestion } from "../../store/questions-actions";
 import { UpdateUQHaandler } from "../../store/authUser-actions";
-function NewQuestion() {
+import { useHistory } from "react-router";
+function NewQuestion(props) {
   const userId = useSelector((state) => state.authUser.authUserID);
   const questions = useSelector((state) => state.questions.questions);
 
   const optionOneInputRef = useRef();
   const optionTwoInputRef = useRef();
-
+const history = useHistory()
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(UpdateUQHaandler(userId));
-  }, [dispatch, questions,userId]);
+  }, [dispatch, questions, userId]);
   function submitHandler(e) {
     e.preventDefault();
     if (
@@ -27,7 +28,8 @@ function NewQuestion() {
         optionOneInputRef.current.value,
         optionTwoInputRef.current.value
       )
-    );
+    ).then(()=>history.push("/"))
+    
   }
   return (
     <div className={classes.father}>

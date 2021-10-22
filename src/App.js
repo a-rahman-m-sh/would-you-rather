@@ -10,7 +10,6 @@ import LeaderboardPage from "./pages/LeaderboardPage";
 import AddQuestionPage from "./pages/AddQuestionPage";
 import DetailedQuestion from "./components/QuestionList/DetailedQuestion";
 
-
 function App() {
   const dispatch = useDispatch();
   const IsAuthUser = useSelector((state) => state.authUser.IsAuthUser);
@@ -20,16 +19,16 @@ function App() {
   useEffect(() => {
     dispatch(fetchQuestionsData());
   }, [dispatch]);
-  
-  !IsAuthUser && alert("Login to play the game ...");
+
   return (
     <Layout>
       <Switch>
         <Route path="/" exact>
           {IsAuthUser && <HomePage />}
           {!IsAuthUser && <Redirect to="/login" />}
+          {/* {!IsAuthUser && alert("Login to play the game ...")} */}
         </Route>
-        <Route path="/login">
+        <Route path="/login" exact>
           {!IsAuthUser && <SignInPage />}
           {IsAuthUser && <Redirect to="/" />}
         </Route>
@@ -38,11 +37,11 @@ function App() {
           {IsAuthUser && <DetailedQuestion />}
           {!IsAuthUser && <Redirect to="/" />}
         </Route>
-        <Route path="/add">
+        <Route path="/add" exact>
           {IsAuthUser && <AddQuestionPage />}
           {!IsAuthUser && <Redirect to="/" />}
         </Route>
-        <Route path="/leaderBoard">
+        <Route path="/leaderBoard" exact>
           {IsAuthUser && <LeaderboardPage />}
           {!IsAuthUser && <Redirect to="/" />}
         </Route>
