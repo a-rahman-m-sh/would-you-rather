@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import classes from "./DetailedQuestion.module.css";
 import { handleAddAnswer } from "../../store/questions-actions";
+import Page404 from "../../pages/Page404";
 function DetailedQuestion() {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.users.users);
@@ -13,6 +14,10 @@ function DetailedQuestion() {
   const params = useParams();
   const { questionId } = params;
   const isAnswered = AnsweredIs.includes(questionId);
+  const isExist = Object.keys(questions).includes(questionId);
+  if (!isExist) {
+    return <Page404/>
+  }
 
   const question = Object.values(questions).find((q) => {
     return q.id === questionId;

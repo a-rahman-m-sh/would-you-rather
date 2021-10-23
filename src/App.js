@@ -1,5 +1,5 @@
 import Layout from "./components/layout/Layout";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect, useLocation } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -13,6 +13,7 @@ import DetailedQuestion from "./components/QuestionList/DetailedQuestion";
 function App() {
   const dispatch = useDispatch();
   const IsAuthUser = useSelector((state) => state.authUser.IsAuthUser);
+  const location = useLocation();
   useEffect(() => {
     dispatch(fetchUsersData());
   }, [dispatch]);
@@ -25,28 +26,38 @@ function App() {
       <Switch>
         <Route path="/" exact>
           {IsAuthUser && <HomePage />}
-          {!IsAuthUser && <Redirect to="/login" />}
-          {/* {!IsAuthUser && alert("Login to play the game ...")} */}
-        </Route>
-        <Route path="/login" exact>
           {!IsAuthUser && <SignInPage />}
-          {IsAuthUser && <Redirect to="/" />}
+          {!IsAuthUser && alert("Login to play the game ...")}
         </Route>
 
         <Route path="/question/:questionId">
           {IsAuthUser && <DetailedQuestion />}
-          {!IsAuthUser && <Redirect to="/" />}
+          {!IsAuthUser && (
+            <Redirect
+              to={{ pathname: "/", state: { from: location.pathname } }}
+            />
+          )}
         </Route>
         <Route path="/add" exact>
           {IsAuthUser && <AddQuestionPage />}
-          {!IsAuthUser && <Redirect to="/" />}
+          {!IsAuthUser && (
+            <Redirect
+              to={{ pathname: "/", state: { from: location.pathname } }}
+            />
+          )}
         </Route>
         <Route path="/leaderBoard" exact>
           {IsAuthUser && <LeaderboardPage />}
-          {!IsAuthUser && <Redirect to="/" />}
+          {!IsAuthUser && (
+            <Redirect
+              to={{ pathname: "/", state: { from: location.pathname } }}
+            />
+          )}
         </Route>
         <Route path="*">
-          <Redirect to="/" />
+          <Redirect
+            to={{ pathname: "/", state: { from: location.pathname } }}
+          />
         </Route>
       </Switch>
     </Layout>
